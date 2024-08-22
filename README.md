@@ -52,5 +52,3 @@ Atenção as unidades de medida e precisão dos sensores (estas informações de
 Entregar o link do GitHub (público) com o arquivo readme.md contendo a documentação com as especificações técnicas do produto, diagrama elétrico e manual de operação, além do código fonte devidamente comentado.
 Será necessário gerar evidências através de um vídeo demonstrativo com 3 minutos (time-lapse) apresentando as funcionalidades do produto e seus diferenciais na forma de um Pitch.
 O vídeo deve estar no YouTube (link público).
-Forms para entrega do link do GitHub e YouTube (entregar até o dia 16/9/2024 até às 23h45): https://forms.office.com/r/Eih0uT5PzM
-Os grupos devem ser os mesmos do PBL (Project-based Learning).
