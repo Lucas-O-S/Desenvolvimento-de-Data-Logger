@@ -12,27 +12,48 @@ int pinoLDR = A0;
  * a esquerda é a linha mais a acima e o da direita é o mais abaixo baixo**/
 byte SimboloCima01[4][8] = {
   //Lua
-  {B00000, B00000, B00000, B00000, B00011, B01111, B01110, B11100},
+  {B00000, B00000, B00000, B00011, B01111, B01110, B11100, B11100},
+  
+  // Nublado
+  {B00000, B00000, B00000, B00000, B00000, B00000, B00111, B01000},
+
+    // Sol entre nuvens
+  {B00000, B00000, B00100, B00010, B00000, B00001, B00111, B01000},
+
 };
 
 byte SimboloBaixo01[4][8] = {
 	//LUA		
-  {B11100, B11100, B11110, B01111, B01111, B00111, B00000, B00000},	
-  	
+  { B11100, B11110, B01111, B01111, B00111, B00000, B00000, B00000},	
+  	 // Nublado
+  {B01000, B10000, B01111, B00000, B00000, B00000, B00000, B00000},
+ // Sol entre nuvens
+  {B01000, B10000, B01111, B00000, B00000, B00000, B00000, B00000},
+
 };
 
 
 byte SimboloCima02[4][8] = {
 	//LUA
-  {B00000, B00000, B00000, B00000, B10000, B00000, B00000, B00000},	
+  {B00000, B00000, B00000, B10000, B00000, B00000, B00000, B00000},	
+  	 // Nublado
+  {B00000, B00000, B00000, B00000, B00000, B00000, B01100, B11010},
+ // Sol entre nuvens
+  {B00000, B01000, B01001, B00010, B11000, B00101, B01100, B11010},
+
 
 
 };
 
 byte SimboloBaixo02[4][8] = {
 	//LUA		
-  {B00000, B00010, B00110, B11110, B11100, B11000, B00000, B00000},	
-  	
+  { B00010, B00110, B11110, B11100, B11000, B00000, B00000, B00000},	
+  	 	 // Nublado
+  {B00001, B00011, B11110, B00000, B00000, B00000, B00000, B00000},
+ // Sol entre nuvens
+  {B00001, B00011, B11110, B00000, B00000, B00000, B00000, B00000},
+
+
 };
 
 ////////////////////////////
@@ -56,12 +77,42 @@ void setup()
 //lcd.print escreve uma mensagem diretamente
 
 void Ui(int IntensidadeLuz){
+  lcd.clear();
     lcd.setCursor(1,0);
     lcd.print("Luz: " + String(IntensidadeLuz) + "%" );
     lcd.setCursor(1,1);
-    lcd.print("Muito Escuro");
+  int simbolo;
+  
+  // Entre 100% e 76% será muito claro
+  if(IntensidadeLuz > 75){
+    lcd.print("Muito Claro");
 
-    EscolherSimbolo(0);
+    simbolo = 3;
+  }
+  else{
+    //Entre 75% e 51% será claro 
+    if(IntensidadeLuz > 50){
+      lcd.print("Claro");
+
+      simbolo = 2;
+    }
+    else{
+      //Entre 50% e 26% será escuro
+      if(IntensidadeLuz > 25){
+       simbolo = 1;
+       lcd.print("Escuro");
+
+      }
+      
+      // Entre 25% e 0% será Muito Escuro
+      else{
+        lcd.print("Muito Escuro");
+      	simbolo = 0;
+      }
+    }
+  }
+
+    EscolherSimbolo(simbolo);
 
 }
 
