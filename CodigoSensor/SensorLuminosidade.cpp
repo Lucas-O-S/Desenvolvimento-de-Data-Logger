@@ -19,6 +19,8 @@ byte SimboloCima01[4][8] = {
 
     // Sol entre nuvens
   {B00000, B00000, B00100, B00010, B00000, B00001, B00111, B01000},
+   // Sol
+  {B00000, B00000, B00000, B00000, B01000, B00100, B00001, B11010},
 
 };
 
@@ -29,6 +31,8 @@ byte SimboloBaixo01[4][8] = {
   {B01000, B10000, B01111, B00000, B00000, B00000, B00000, B00000},
  // Sol entre nuvens
   {B01000, B10000, B01111, B00000, B00000, B00000, B00000, B00000},
+   // Sol
+  {B00010, B00001, B00100, B01001, B00001, B00000, B00000, B00000},
 
 };
 
@@ -40,6 +44,8 @@ byte SimboloCima02[4][8] = {
   {B00000, B00000, B00000, B00000, B00000, B00000, B01100, B11010},
  // Sol entre nuvens
   {B00000, B01000, B01001, B00010, B11000, B00101, B01100, B11010},
+   // Sol
+  {B00000, B00000, B00000, B10000, B10001, B00010, B10000, B01000},
 
 
 
@@ -52,6 +58,8 @@ byte SimboloBaixo02[4][8] = {
   {B00001, B00011, B11110, B00000, B00000, B00000, B00000, B00000},
  // Sol entre nuvens
   {B00001, B00011, B11110, B00000, B00000, B00000, B00000, B00000},
+   // Sol
+  {B01011, B10000, B00100, B00010, B00000, B00000, B00000, B00000},
 
 
 };
@@ -83,28 +91,28 @@ void Ui(int IntensidadeLuz){
     lcd.setCursor(1,1);
   int simbolo;
   
-  // Entre 100% e 76% será muito claro
-  if(IntensidadeLuz > 75){
+  // Entre 100% e 10% será muito claro
+  if(IntensidadeLuz > 10){
     lcd.print("Muito Claro");
 
     simbolo = 3;
   }
   else{
-    //Entre 75% e 51% será claro 
-    if(IntensidadeLuz > 50){
+    //Entre 10% e 1% será claro 
+    if(IntensidadeLuz > 1){
       lcd.print("Claro");
 
       simbolo = 2;
     }
     else{
-      //Entre 50% e 26% será escuro
-      if(IntensidadeLuz > 25){
+      //Entre 1% e 0.1% será escuro
+      if(IntensidadeLuz > 0.1){
        simbolo = 1;
        lcd.print("Escuro");
 
       }
       
-      // Entre 25% e 0% será Muito Escuro
+      // Entre 0.1% e 0% será Muito Escuro
       else{
         lcd.print("Muito Escuro");
       	simbolo = 0;
