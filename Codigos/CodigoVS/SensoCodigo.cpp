@@ -1,6 +1,10 @@
-#include <LiquidCrystal.h>
+#include <DHT.h> //https://github.com/adafruit/DHT-sensor-library/blob/master/examples/DHTtester/DHTtester.ino
+#include <DHT_U.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 
-LiquidCrystal lcd(12, 11, 10, 5, 4, 3, 2);
+LiquidCrystal_I2C lcd(12, 11, 10);
+DHT dht(8, DHT11);
 
 int ValorLDR; 
 int IntensidadeLuz; 
@@ -25,9 +29,9 @@ byte SimboloCima01[4][8] = {
 };
 
 byte SimboloBaixo01[4][8] = {
-	//LUA		
-  { B11100, B11110, B01111, B01111, B00111, B00000, B00000, B00000},	
-  	 // Nublado
+  //LUA   
+  { B11100, B11110, B01111, B01111, B00111, B00000, B00000, B00000},  
+     // Nublado
   {B01000, B10000, B01111, B00000, B00000, B00000, B00000, B00000},
  // Sol entre nuvens
   {B01000, B10000, B01111, B00000, B00000, B00000, B00000, B00000},
@@ -38,9 +42,9 @@ byte SimboloBaixo01[4][8] = {
 
 
 byte SimboloCima02[4][8] = {
-	//LUA
-  {B00000, B00000, B00000, B10000, B00000, B00000, B00000, B00000},	
-  	 // Nublado
+  //LUA
+  {B00000, B00000, B00000, B10000, B00000, B00000, B00000, B00000}, 
+     // Nublado
   {B00000, B00000, B00000, B00000, B00000, B00000, B01100, B11010},
  // Sol entre nuvens
   {B00000, B01000, B01001, B00010, B11000, B00101, B01100, B11010},
@@ -52,9 +56,9 @@ byte SimboloCima02[4][8] = {
 };
 
 byte SimboloBaixo02[4][8] = {
-	//LUA		
-  { B00010, B00110, B11110, B11100, B11000, B00000, B00000, B00000},	
-  	 	 // Nublado
+  //LUA   
+  { B00010, B00110, B11110, B11100, B11000, B00000, B00000, B00000},  
+       // Nublado
   {B00001, B00011, B11110, B00000, B00000, B00000, B00000, B00000},
  // Sol entre nuvens
   {B00001, B00011, B11110, B00000, B00000, B00000, B00000, B00000},
@@ -77,7 +81,7 @@ void setup()
   Serial.begin(9600); 
   pinMode(pinoLDR, INPUT); 
 
-  
+  dht.begin();
 }
 
 
@@ -92,21 +96,21 @@ void Ui(int IntensidadeLuz){
   int simbolo;
   
   // Entre 100% e 10% será muito claro
-  if(IntensidadeLuz > 10){
+  if(IntensidadeLuz > 35){
     lcd.print("Muito Claro");
 
     simbolo = 3;
   }
   else{
     //Entre 10% e 1% será claro 
-    if(IntensidadeLuz > 1){
+    if(IntensidadeLuz > 2){
       lcd.print("Claro");
 
       simbolo = 2;
     }
     else{
       //Entre 1% e 0.1% será escuro
-      if(IntensidadeLuz > 0.1){
+      if(IntensidadeLuz > 0.5){
        simbolo = 1;
        lcd.print("Escuro");
 
@@ -115,7 +119,7 @@ void Ui(int IntensidadeLuz){
       // Entre 0.1% e 0% será Muito Escuro
       else{
         lcd.print("Muito Escuro");
-      	simbolo = 0;
+        simbolo = 0;
       }
     }
   }
@@ -177,19 +181,36 @@ void SerialDisplay(int ValorLDR, int IntensidadeLuz){
 
 void loop()
 {
+  //Luz
   //Pega o valor da luz e converte em porcentagem
   ValorLDR = analogRead(pinoLDR); 
-  IntensidadeLuz = map(ValorLDR, 1017, 344, 0, 100); //Converte o valor para uma escala de 0 a 100
+  IntensidadeLuz = map(ValorLDR, 0, 400, 0, 100); //Converte o valor para uma escala de 0 a 100
   
   //Escreve no console serial os valores
   SerialDisplay(pinoLDR,IntensidadeLuz);
   
-	
+  
   //Passa para o LCD
   Ui(IntensidadeLuz);
 
 
   
-  delay(1000);
- 
+  delay(3000);
+  //////////////////////////////////////////////////////////////////////////////////////////////////////
+  //Temperatura e umidade
+  //Exibe os valores lidos
+  float humidity = dht.readHumidity();
+  float temperature = dht.readTemperature();
+
+  if (isnan(humidity) || isnan(temperature)) {
+    Serial.println("Falha ao ler do DHT11!");
+    return;
+  }
+
+  Serial.print("Umidade: ");
+  Serial.print(humidity);
+  Serial.print("%  Temperatura: ");
+  Serial.print(temperature);
+  Serial.println("C");
+  delay(2000);
 }
