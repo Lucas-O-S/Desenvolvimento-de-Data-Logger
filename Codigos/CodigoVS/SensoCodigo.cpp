@@ -3,7 +3,7 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C lcd(12, 11, 10);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 DHT dht(8, DHT11);
 
 int ValorLDR; 
@@ -175,6 +175,7 @@ void SerialDisplay(int ValorLDR, int IntensidadeLuz){
   Serial.print("Intensidade de Luz 0 - 1023 = "); 
   Serial.println(ValorLDR); 
   Serial.print("Intensidade de Luz 0 - 100% = ");
+
   Serial.println(IntensidadeLuz);
   
 }
@@ -185,7 +186,9 @@ void loop()
   //Pega o valor da luz e converte em porcentagem
   ValorLDR = analogRead(pinoLDR); 
   IntensidadeLuz = map(ValorLDR, 0, 400, 0, 100); //Converte o valor para uma escala de 0 a 100
-  
+    if(IntensidadeLuz > 100){
+    IntensidadeLuz=100;
+  }
   //Escreve no console serial os valores
   SerialDisplay(pinoLDR,IntensidadeLuz);
   
