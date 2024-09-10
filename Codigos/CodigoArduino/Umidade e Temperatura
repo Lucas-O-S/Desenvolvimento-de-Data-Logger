@@ -210,7 +210,7 @@ byte UmiDirInf[5][8] =
 void setup()
 {
   //Inicia do lcd
-  lcd.begin(16,2);              
+  lcd.init();              
   lcd.clear(); 
   
   //Inicia o console
