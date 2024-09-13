@@ -53,15 +53,26 @@ class Tempo
       else
       {
         String AMPM;//No texto final coloca o AM ou PM
-        lcd.setCursor(1,0);//Limpa o resto das letras que não foram sobrepostas
+        lcd.setCursor(1, 0); //Limpa o resto das letras que não foram sobrepostas
         lcd.print("  ");
 
         // Se 'informacaotempo' for verdadeiro, exibe data e hora
         lcd.setCursor(3, 0);
-        lcd.print(agora.day(), DEC);
-        lcd.print("/");
-        lcd.print(agora.month(), DEC);
-        lcd.print("/");
+
+        if (alterador == 1) //Data em formato brasileiro
+        {
+          lcd.print(agora.day(), DEC);
+          lcd.print("/");
+          lcd.print(agora.month(), DEC);
+          lcd.print("/");
+        }
+        else if (alterador == 2)//Data em formato AM/PM (Normalmente Americano)
+        {
+          lcd.print(agora.month(), DEC);
+          lcd.print("/");
+          lcd.print(agora.day(), DEC);
+          lcd.print("/");
+        }
         lcd.print(agora.year(), DEC);
 
         lcd.setCursor(4, 1);
@@ -74,7 +85,7 @@ class Tempo
           if (agora.hour() >= 12) {
             AMPM = "PM";
           } else {
-             AMPM = "AM";
+            AMPM = "AM";
           }
         }
         lcd.print(":");
