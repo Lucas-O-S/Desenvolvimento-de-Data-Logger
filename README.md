@@ -1,5 +1,4 @@
 # Termo-Light: Sensores para controle de ambiente em laboratórios
-## <center>Setembro de 2024</center>
 ![AnimaçãoTermoLightV2_002](https://github.com/user-attachments/assets/83fc4fdd-1994-43ca-bdcb-f5438aff60e5)
 
 
