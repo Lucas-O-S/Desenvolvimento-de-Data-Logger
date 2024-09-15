@@ -13,17 +13,17 @@ Este manual descreve o funcionamento do Termo-Light, um dispositivo que monitora
 
 | Componente                     | Imagem                                         | Quantidade |
 |---------------------------------|------------------------------------------------|------------|
-| Arduino UNO                     | <div align="center">![Arduino UNO](./assets/arduino_uno.png)</div>       | 1          |
-| Sensor de temperatura e umidade DHT22 | <div align="center">![DHT22](./assets/sensor_de_temperatura_e_umidade_dht22.png)</div> | 1          |
-| Sensor de luz LDR               | <div align="center">![LDR](./assets/sensor_de_luz_ldr.png)</div>         | 1          |
-| Buzzer                          | <div align="center">![Buzzer](./assets/buzzer.png)</div>                 | 1          |
-| LED RGB                         | <div align="center">![LED RGB](./assets/led_rgb.png)</div>               | 1          |
-| LCD I2C 16x2                    | <div align="center">![LCD I2C 16x2](./assets/lcd_i2c_16x2.png)</div>     | 1          |
-| Botões                          | <div align="center">![Botões](./assets/botoes.png)</div>                 | 3          |
-| Relógio de Tempo Real RTC DS3231 | <div align="center">![RTC DS3231](./assets/relogio_de_tempo_real_rtc_ds3231.png)</div> | 1          |
-| Placa de prototipagem            | <div align="center">![Placa](./assets/placa_de_prototipagem.png)</div>   | 1          |
-| Resistores                      | <div align="center">![Resistores](./assets/resistores.png)</div>         | 6          |
-| Cabos de ligação (Jumpers)       | <div align="center">![Jumpers](./assets/cabos_de_ligacao_jumpers.png)</div> | Vários     |
+| Arduino UNO                     | <div align="center">![Arduino UNO](./Imagens/Arduino.jpeg)</div>       | 1          |
+| Sensor de temperatura e umidade DHT22 | <div align="center">![DHT22](./Imagens/DHT22.jpeg)</div> | 1          |
+| Sensor de luz LDR               | <div align="center">![LDR](./Imagens/sensorLuz.jpeg)</div>         | 1          |
+| Buzzer                          | <div align="center">![Buzzer](./Imagens/buzzer.jpeg)</div>                 | 1          |
+| LED RGB                         | <div align="center">![LED RGB](./Imagens/rgb.jpeg)</div>               | 1          |
+| LCD I2C 16x2                    | <div align="center">![LCD I2C 16x2](./Imagens/i2c.jpeg)</div>     | 1          |
+| Botões                          | <div align="center">![Botões](./Imagens/botao.jpeg)</div>                 | 3          |
+| Relógio de Tempo Real RTC DS3231 | <div align="center">![RTC DS3231](./Imagens/relogio.jpeg)</div> | 1          |
+| Placa de prototipagem            | <div align="center">![Placa](./Imagens/placa.jpeg)</div>   | 1          |
+| Resistores                      | <div align="center">![Resistores](./Imagens/resistor.jpeg)</div>         | 6          |
+| Cabos de ligação (Jumpers)       | <div align="center">![Jumpers](./Imagens/jumpers.jpeg)</div> | Vários     |
 
 </details>
 
@@ -39,6 +39,9 @@ Este manual descreve o funcionamento do Termo-Light, um dispositivo que monitora
 | **Botões**       | - Botão 1 -> Pino Digital 13 (Arduino UNO) <br> - Botão 2 -> Pino Digital 12 (Arduino UNO) <br> - Botão 3 -> Pino Digital 11 (Arduino UNO) |
 | **RTC**          | - SDA (RTC) -> SDA (Arduino UNO) <br> - SCL (RTC) -> SCL (Arduino UNO) <br> - VCC (RTC) -> 5V (Arduino UNO) <br> - GND (RTC) -> GND (Arduino UNO) |
 | **LCD**          | - SDA (LCD) -> SDA (Arduino UNO) <br> - SCL (LCD) -> SCL (Arduino UNO) <br> - VCC (LCD) -> 5V (Arduino UNO) <br> - GND (LCD) -> GND (Arduino UNO) |
+
+# Diagrama elétrico
+![Diagrama Eletrico](./Imagens/diagramaEletrico.jpg)</div>
 
 # Configuração Inicial:
 1. Conecte a bateria de 9 volts ao Arduino UNO.
