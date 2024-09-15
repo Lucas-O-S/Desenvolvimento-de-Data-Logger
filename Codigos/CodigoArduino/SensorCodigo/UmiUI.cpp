@@ -82,6 +82,7 @@ class UmidadeControl {
       {B11110, B11111, B11111, B11111, B11011, B10111, B11110, B11100},
     };
 
+///Recebe o valor da umidade e lcd para passa informações
     void EscSimUmi(int simbUmi,  LiquidCrystal_I2C lcd)
     {
       lcd.createChar(0, UmiEsqSup[simbUmi]);
@@ -104,6 +105,7 @@ class UmidadeControl {
       lcd.setCursor(16, 0);
       lcd.write(byte(4));
     }
+
 
 
   public:

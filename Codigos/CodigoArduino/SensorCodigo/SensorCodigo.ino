@@ -11,14 +11,15 @@
 
 
 
-
+//Set up do lcd
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
+//Define o pin do dht
 #define pinoDHT 8
 
 //Altere para DHT11 no real
 //Inicia o DHT
-DHT dht(pinoDHT, DHT11);
+DHT dht(pinoDHT, DHT22);
 
 //Define as entradas de cada cor do led
 #define Red 7
@@ -29,7 +30,6 @@ DHT dht(pinoDHT, DHT11);
 #define buzzer 9
 
 //Define as variaveis do Sensor LDR e sua entrada
-
 int pinoLDR = A0;
 
 //Entradas dos botões
@@ -42,14 +42,15 @@ int EntradaBotao03 = 11;
 //Inicia variavel rtc
 RTC_DS3231 rtc;
 
-//Chamar classes uteis
+//Chamar as classe d cada tela
 TemperaturaControl temperaturaControl;
 UmidadeControl umidadeControl;
 LuzControl luzControl;
 Tempo tempo;
 
+//Tela de Introdução 
 void Intro() {
-
+  //escreve termo light e pisca varias vezes
   for (int i = 0; i < 3; i++) {
     lcd.backlight();
     lcd.setCursor(4, 0);
@@ -69,6 +70,7 @@ void Intro() {
   delay(2000);
   lcd.clear();
 }
+
 
 
 void setup()
@@ -103,9 +105,13 @@ void setup()
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
 
+  //Carreha memoria
   Carregar();
+
+  //Inicia luz
   Luz_RGB(0, 255, 0);
 
+  //Roda a intro
   Intro();
 
 }
@@ -128,58 +134,76 @@ int EstadoBotao01 = LOW;
 int EstadoBotao02 = LOW;
 int EstadoBotao03 = LOW;
 
+
+///Variavel de escolha de tom buzzer
 int escolhaTom = 1;
+
+////Tom inicial do buzzer
 int tomBuzzer = 440;
 
+///função de mudar buzzer
 void MudarBuzzer() {
-    EstadoBotao03 = digitalRead(EntradaBotao03);
+  ////Leitura do botão do buzzer
+  EstadoBotao03 = digitalRead(EntradaBotao03);
 
+  ///Se apertar o botão ativar troca o tom
   if (EstadoBotao03 == HIGH) {
     //delay anti debounce
     delay(50);
     escolhaTom++;
 
-    if(escolhaTom == 5){
+    if (escolhaTom == 5) {
       escolhaTom = 1;
 
     }
-    switch (escolhaTom){
+    switch (escolhaTom) {
       case 1:
         tomBuzzer = 440;
-      break; 
-      
+        break;
+
       case 2:
         tomBuzzer = 500;
 
-      break; 
+        break;
       case 3:
         tomBuzzer = 700;
 
-      break; 
+        break;
       case 4:
         tomBuzzer = 250;
 
-      break; 
+        break;
       case 5:
         tomBuzzer = 3020;
 
-      break; 
+        break;
     }
+    //Toca buzzer para teste
     TocarBuzzer();
   }
 }
 
-void TocarBuzzer(){
+///Toca o buzzer
+void TocarBuzzer() {
   tone(buzzer, tomBuzzer, 300);
+  delay(400);
+  tone(buzzer, tomBuzzer, 300);
+  delay(400);
+  tone(buzzer, tomBuzzer, 300);
+
 }
 
 
 
 //Qual tela está atualmente
 int telaAtual = 1;
+
+//Função de mudar inidice de tela
 void MudarTela() {
+  //Pega estado do botão 1
   EstadoBotao01 = digitalRead(EntradaBotao01);
 
+  //Se botão for ativado muda indice
   if (EstadoBotao01 == HIGH) {
     //delay anti debounce
     delay(50);
@@ -194,8 +218,11 @@ void MudarTela() {
 }
 
 
+//Atravez da letra inicial da variavel, o valor dela e o tempo 
+//escreve uma mensagem com as informações recebidas
 void MostrarInfo(char variavel, float valor, DateTime tempo) {
 
+  //Escreve tempo
   Serial.print(tempo.hour(), DEC);
   Serial.print(":");
   Serial.print(tempo.minute(), DEC);
@@ -208,7 +235,7 @@ void MostrarInfo(char variavel, float valor, DateTime tempo) {
   Serial.print("/");
   Serial.println(tempo.year(), DEC);
 
-
+  //Verifica qual a variavel
   Serial.print("- Limite de ");
   if (variavel == 'T') {
     Serial.print("Temperatura ");
@@ -226,22 +253,42 @@ void MostrarInfo(char variavel, float valor, DateTime tempo) {
   }
   Serial.println("foi atingido");
 
+  //Escreve valor
   Serial.print("Valor Lido de ");
   Serial.println(valor);
   Serial.println("------------------------------------------------------");
 }
 
+
+///Ultima execução verifica quando foi executado a função LIMIt Break pela ultima vez
+unsigned long ultimaExecucao = 0;
+
+//Intervalo mostra o tempo minimo de execução da função
+const int intervalo = 60000;
+
+///Função que avisa em caso de trigger de limite quebrado
 void LimitBreak(char variavel, float valor, DateTime tempo) {
+  
+  //Verifica se passou tempo minimo
+  if ( millis() -  ultimaExecucao> intervalo) {
+    ultimaExecucao = millis();
+    //Luz vermelha
+    Luz_RGB(255, 0, 0);
+    ///buzzer avisa
+    TocarBuzzer();
+ 
 
-  TocarBuzzer();
-  Luz_RGB(255, 0, 0);
+    //Mostra o que aconteceu
+    MostrarInfo(variavel, valor, tempo);
+    //Salva a memoria
+    Salvar(variavel, valor, tempo);
+    Serial.println("Salvo na Memoria");
+    delay(1000);
 
-  MostrarInfo(variavel, valor, tempo);
+    //Liga a luz verde
+    Luz_RGB(0, 255, 0);
 
-  Salvar(variavel, valor, tempo);
-  Serial.println("Salvo na Memoria");
-  delay(1000);
-  Luz_RGB(0, 0, 255);
+  }
 
 
 
@@ -281,7 +328,8 @@ void Carregar() {
 
   Serial.println("Dados Salvos Anteriormente na memoria: ");
   for (int i = 0; i <= 85; i += 12) {
-
+    
+    //Le a memoria e salva o valor em variaveis para depois ser escrito no console
     char variavel = EEPROM.read(i);
     float valor;
     EEPROM.get(i + 1, valor);
@@ -313,6 +361,7 @@ float temperaturaAntiga = 0;
 float umidadeAntiga = 0;
 int ldrAntigo = 0;
 
+//Trigger de cada variavel
 float triggerTemperaturaMAX = 25;
 float triggerTemperaturaMIN = 15;
 
@@ -326,14 +375,18 @@ float triggerLuzMIN = 0.1;
 
 void loop()
 {
+  //Verifica o tempo agora
   DateTime agora = rtc.now();
 
+  //Espera pelo botão 03 ser ativado
   MudarBuzzer();
 
   //Busca o estado de cada variavel analisada
   float Umidade = dht.readHumidity();
   float Temperatura = dht.readTemperature();
   ValorLDR = analogRead(pinoLDR);
+  //Pega o valor da luz e converte em porcentagem
+
   IntensidadeLuz = map(ValorLDR, 0, 400, 0, 100); //Converte o valor para uma escala de 0 a 100
 
   //Verifica LDR
@@ -343,13 +396,13 @@ void loop()
     return;
   }
 
+  //Espera pelo botão 1 ser ativado
   MudarTela();
 
   switch (telaAtual) {
 
+    //Tela 1 Luz
     case 1:
-      //Luz
-      //Pega o valor da luz e converte em porcentagem
 
       if (IntensidadeLuz > 100)
       {
@@ -370,6 +423,7 @@ void loop()
 
       break;
 
+    //Tela 2 Umidade
     case 2:
 
 
@@ -382,6 +436,7 @@ void loop()
       umidadeControl.UI(Umidade, lcd);
       break;
 
+    //Tela 3 temperatura
     case 3:
       temperaturaControl.UI(Temperatura, lcd, EntradaBotao02);
 
@@ -393,6 +448,7 @@ void loop()
 
       break;
 
+    //Tela 4 tempo
     case 4:
       tempo.UI(agora, lcd, EntradaBotao02);
       break;
@@ -401,6 +457,7 @@ void loop()
 
   //Se alguma variavel mudar
   if (  temperaturaAntiga != Temperatura || umidadeAntiga != Umidade || ldrAntigo != ValorLDR) {
+    delay(200);
     lcd.clear();
 
     ///Triggers de limites ultrapassados
