@@ -73,6 +73,48 @@ Este manual descreve o funcionamento do Termo-Light, um dispositivo que monitora
 - **Umidade**: 30 - 50%
 - **Luz**: 0.1 - 30%
 
+## Especificações
+Para garantir a qualidade do insumo farmacêutico durante o armazenamento e transporte, é necessário um sensor que monitore luz, umidade e temperatura, evitando condições que possam comprometer a sua integridade, em especial, do princípio ativo. 
+As especificações são projetadas para garantir a detecção precisa de condições adversas, protegendo a qualidade de insumos durante toda a cadeia de armazenamento e transporte. Sendo assim, importante armazenar dados da variação desses fatores e o tempo para que futuras correções sejam realizadas na cadeia de armazenamento e transporte.
+As faixas de triggers podem ser alteradas através do código, caso necessário, dependendo das especificações de transporte e armazenamento tanto do país quanto do insumo.
+Segue abaixo as especificações atuais do sensor:
+
+1. Faixa de Medição de Luz:
+   - Tipo de luz: visível 
+   - Faixa de medição: 0 a 100% de luminosidade que é calculada através da resistência (adequado para monitorar ambientes internos e possíveis exposições a fontes de luz intensa).
+   - Faixa do trigger: de 0,1 a 30%.
+
+2. Faixa de Medição de Umidade:
+   - Faixa de umidade relativa: 0 a 100% (especialmente importante para detectar pequenos aumentos que podem causar hidrólise ou até mesmo favorecer o crescimento de seres vivos contaminantes).
+   - Faixa do trigger: de 30% a 50% de umidade.
+
+3. Faixa de Medição de Temperatura:
+   - Faixa de temperatura: 0°C a 50°C (adequado para diversas condições de armazenamento e transporte).
+   - Faixa do trigger: de 15 a 25ºC.
+
+4. Características de Comunicação:
+   - Protocolo de comunicação: USB (para integração com sistemas de monitoramento).
+   - Interface: Display LCD I2C para exibição de dados e status para leitura dos valores.
+   - Alarmes: Notificações sonoras(buzzer) e visuais para alertar sobre condições fora dos limites pré-estabelecidos.
+
+5. Condições Operacionais:
+   - Temperatura de operação: 0°C a 50°C.
+   - Umidade de operação: 0 a 95% UR, sem condensação.
+   - Resistência a contaminantes: Proteção contra poeira e respingos (Futuramente colocar todo o sistema em uma caixa).
+
+6. Alimentação:
+   - Fonte de energia: Bateria de 9V ou alimentação por cabo USB.
+
+7. Calibração e Manutenção:
+   - Software: Compatibilidade com software de monitoramento para registro de dados e análise histórica.
+
+8. Dimensões e Instalação:
+   - Tamanho: Compacto (cerca de 20 x 14 x 10 cm).
+   - Método de instalação: Montagem em laboratórios e enviadas para ficarem em estantes de armazenamento.
+
+9. Armazenamento de Dados:
+   - Capacidade de registro: Armazenamento interno de dados na memória EEPROM com possibilidade de exportação para análise posterior.
+
 
 # Aviso:
 - Mantenha o dispositivo em um local seguro e seco.
