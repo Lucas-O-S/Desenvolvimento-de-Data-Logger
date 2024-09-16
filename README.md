@@ -68,14 +68,9 @@ Este manual descreve o funcionamento do Termo-Light, um dispositivo que monitora
 - **Buzzer**: Toca um sinal sonoro quando os valores de temperatura, umidade ou luz excedem os limites pré-definidos.
 - **LED RGB**: Mudará para vermelho quando os valores de temperatura, umidade ou luz excedem os limites pré-definidos.
 
-## Limites Pré-Definidos:
-- **Temperatura**: 15 - 25 graus Celsius
-- **Umidade**: 30 - 50%
-- **Luz**: 0.1 - 30%
-
 ## Especificações
-Para garantir a qualidade do insumo farmacêutico durante o armazenamento e transporte, é necessário um sensor que monitore luz, umidade e temperatura, evitando condições que possam comprometer a sua integridade, em especial, do princípio ativo. 
-As especificações são projetadas para garantir a detecção precisa de condições adversas, protegendo a qualidade de insumos durante toda a cadeia de armazenamento e transporte. Sendo assim, importante armazenar dados da variação desses fatores e o tempo para que futuras correções sejam realizadas na cadeia de armazenamento e transporte.
+Para garantir a qualidade de um insumo farmacêutico durante o armazenamento e transporte, é necessário um sensor que monitore luz, umidade e temperatura, evitando condições que possam comprometer a sua integridade, em especial, a do princípio ativo. 
+As especificações são projetadas para garantir a detecção precisa de condições adversas, alertando os fabricantes e garantindo que estes possam proteger a qualidade de insumos durante toda a cadeia de armazenamento e transporte. Sendo assim, importante armazenar dados da variação desses fatores e o tempo para que futuras correções sejam realizadas na cadeia de armazenamento e transporte.
 As faixas de triggers podem ser alteradas através do código, caso necessário, dependendo das especificações de transporte e armazenamento tanto do país quanto do insumo.
 Segue abaixo as especificações atuais do sensor:
 
