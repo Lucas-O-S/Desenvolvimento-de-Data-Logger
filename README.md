@@ -14,7 +14,7 @@ Este manual descreve o funcionamento do Termo-Light, um dispositivo que monitora
 | Componente                     | Imagem                                         | Quantidade |
 |---------------------------------|------------------------------------------------|------------|
 | Arduino UNO                     | <div align="center">![Arduino UNO](./Imagens/Arduino.jpeg)</div>       | 1          |
-| Sensor de temperatura e umidade DHT11 | <div align="center">![DHT22](./Imagens/DHT22.jpeg)</div> | 1          |
+| Sensor de temperatura e umidade DHT11 | <div align="center">![DHT11](./Imagens/DHT11.jpeg)</div> | 1          |
 | Sensor de luz LDR               | <div align="center">![LDR](./Imagens/sensorLuz.jpeg)</div>         | 1          |
 | Buzzer                          | <div align="center">![Buzzer](./Imagens/buzzer.jpeg)</div>                 | 1          |
 | LED RGB                         | <div align="center">![LED RGB](./Imagens/rgb.jpeg)</div>               | 1          |
