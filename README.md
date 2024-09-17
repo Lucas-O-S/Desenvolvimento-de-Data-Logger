@@ -14,7 +14,7 @@ Este manual descreve o funcionamento do Termo-Light, um dispositivo que monitora
 | Componente                     | Imagem                                         | Quantidade |
 |---------------------------------|------------------------------------------------|------------|
 | Arduino UNO                     | <div align="center">![Arduino UNO](./Imagens/Arduino.jpeg)</div>       | 1          |
-| Sensor de temperatura e umidade DHT22 | <div align="center">![DHT22](./Imagens/DHT22.jpeg)</div> | 1          |
+| Sensor de temperatura e umidade DHT11 | <div align="center">![DHT22](./Imagens/DHT22.jpeg)</div> | 1          |
 | Sensor de luz LDR               | <div align="center">![LDR](./Imagens/sensorLuz.jpeg)</div>         | 1          |
 | Buzzer                          | <div align="center">![Buzzer](./Imagens/buzzer.jpeg)</div>                 | 1          |
 | LED RGB                         | <div align="center">![LED RGB](./Imagens/rgb.jpeg)</div>               | 1          |
@@ -32,7 +32,7 @@ Este manual descreve o funcionamento do Termo-Light, um dispositivo que monitora
 
 | **Componente**   | **Conexões** |
 |------------------|--------------|
-| **DHT22**        | - Pino de Dados (DHT22) -> Pino Digital 8 (Arduino UNO) <br> - VCC (DHT22) -> 5V (Arduino UNO) <br> - GND (DHT22) -> GND (Arduino UNO) |
+| **DHT11**        | - Pino de Dados (DHT22) -> Pino Digital 8 (Arduino UNO) <br> - VCC (DHT22) -> 5V (Arduino UNO) <br> - GND (DHT22) -> GND (Arduino UNO) |
 | **LDR**          | - Pino de saída (LDR) -> A0 (Arduino UNO) |
 | **Buzzer**       | - Pino de saída (Buzzer) -> Pino Digital 9 (Arduino UNO) |
 | **LED RGB**      | - Vermelho (LED RGB) -> Pino Digital 7 (Arduino UNO) <br> - Verde (LED RGB) -> Pino Digital 6 (Arduino UNO) <br> - Azul (LED RGB) -> Pino Digital 5 (Arduino UNO) |
